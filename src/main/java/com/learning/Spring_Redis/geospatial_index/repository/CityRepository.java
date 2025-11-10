@@ -1,0 +1,10 @@
+package com.learning.Spring_Redis.geospatial_index.repository;
+
+import com.learning.Spring_Redis.geospatial_index.model.City;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CityRepository extends JpaRepository<City, Integer> {
+    Page<City> findAll(Pageable pageable);
+}
