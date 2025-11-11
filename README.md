@@ -23,7 +23,32 @@ Access Redis CLI:
 
 docker exec -it redis-server redis-cli
 
-## 🌍 2️⃣ Using Redis GEO Commands
+## Load locations into the database
+
+- Using postgres database
+- Storing cities from the csv file into the database
+- creating table city 
+- copy city data (longitude, latitude) from csv to database
+- Will load all the cities from the database to redis with the help of SpringBoot.
+
+```sql
+CREATE TABLE city (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    state_id INT,
+    state_code VARCHAR(10),
+    state_name VARCHAR(255),
+    country_id INT,
+    country_code VARCHAR(10),
+    country_name VARCHAR(255),
+    latitude DECIMAL(10, 6),
+    longitude DECIMAL(10, 6),
+    wikiDataId VARCHAR(255)
+);
+
+COPY public.city FROM 'E:\Sunil\SpringBoot\Spring-with-Redis-Cache\src\main\resources\data\cities.csv' DELIMITER ',' CSV HEADER;
+```
+## 🌍  Using Redis GEO Commands
 
 Redis GEO commands let you store and query geospatial data (latitude/longitude).
 
@@ -75,7 +100,7 @@ Or use specific coordinates:
 GEOSEARCH cities FROMLONLAT 80.2707 13.0827 BYRADIUS 300 km
 ```
 
-## 🧹 3️⃣ Manage and inspect data
+## 🧹 Manage and inspect data
 
 Show all keys:
 ```
@@ -93,7 +118,7 @@ Check how many cities are stored:
 ZCARD cities
 ```
 
-## 🧠 4️⃣ Notes
+## 🧠  Notes
 
 GEO data is internally stored as a Sorted Set (ZSET).
 

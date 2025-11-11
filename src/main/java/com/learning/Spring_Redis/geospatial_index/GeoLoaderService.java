@@ -76,6 +76,7 @@ public class GeoLoaderService {
         Point center = new Point(longitude, latitude);
         Distance radius = new Distance(radiusKm, Metrics.KILOMETERS);
         System.out.println(LocalDateTime.now());
+
         GeoResults<RedisGeoCommands.GeoLocation<String>> results =
                 redisTemplate.opsForGeo().radius("locations", new Circle(center, radius),
                         RedisGeoCommands.GeoRadiusCommandArgs.newGeoRadiusArgs()
@@ -83,14 +84,6 @@ public class GeoLoaderService {
                                 .includeDistance());
 
         System.out.println(LocalDateTime.now());
-//        if (results != null) {
-//            results.getContent().forEach(r -> {
-//                System.out.println(
-//                        r.getContent().getName() + " — " +
-//                                r.getDistance().getValue() + " " + r.getDistance().getUnit()
-//                );
-//            });
-//        }
         return results;
     }
 }
